@@ -35,7 +35,7 @@ public class WebSpawner : MonoBehaviour
                 holdCounter += Time.deltaTime;
 
                 Color c = renderer.material.color;
-                c.a = Mathf.Clamp01(holdCounter / (spawnWebDuration * 1.7f) );
+                c.a = Mathf.Clamp01(holdCounter / (spawnWebDuration * 1.7f));
                 renderer.material.color = c;
 
                 if (holdCounter >= spawnWebDuration)
