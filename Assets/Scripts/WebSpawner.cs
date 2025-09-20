@@ -12,7 +12,7 @@ public class WebSpawner : MonoBehaviour
     private Collider col;
 
     public float spawnWebDuration = 2f;
-    public float getAFlyDuration = 2f;
+    public float getAFlyDuration = 1f;
     private float holdCounter = 0f;
 
     private bool inTrigger = false;
@@ -35,13 +35,17 @@ public class WebSpawner : MonoBehaviour
                 holdCounter += Time.deltaTime;
 
                 Color c = renderer.material.color;
-                c.a = Mathf.Clamp01(holdCounter / spawnWebDuration);
+                c.a = Mathf.Clamp01(holdCounter / (spawnWebDuration * 1.7f) );
                 renderer.material.color = c;
 
                 if (holdCounter >= spawnWebDuration)
                 {
                     col.enabled = true;
                     isWebCreated = true;
+                    holdCounter = 0f;
+                    Color ca = renderer.material.color;
+                    ca.a = 1f;
+                    renderer.material.color = ca;
                 }
             }
 
@@ -50,7 +54,7 @@ public class WebSpawner : MonoBehaviour
                 holdCounter = 0f;
                 destroyWeb();
             }
-        } else if (isWebCreated && inTrigger && webController.isAnyFlyCatched())
+        } else if (isWebCreated && inTrigger && webController.IsAnyFlyCatched())
         {
             if (Input.GetKey(KeyCode.Space))
             {
@@ -59,7 +63,8 @@ public class WebSpawner : MonoBehaviour
                 if (holdCounter >= getAFlyDuration)
                 {
                     //Burda bir adet fly sırtına attırıcaz
-                    webController.getAFly();
+                    webController.GetAFly();
+                    holdCounter = 0f;
                 }
             }   
             if (Input.GetKeyUp(KeyCode.Space))
@@ -71,13 +76,19 @@ public class WebSpawner : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        inTrigger = true;
+        if (other.gameObject.CompareTag("Spider"))
+        {
+            inTrigger = true;
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        inTrigger = false;
-        holdCounter = 0f;
+        if (other.gameObject.CompareTag("Spider"))
+        {
+            inTrigger = false;
+            holdCounter = 0f;
+        }
     }
 
     public void destroyWeb()
@@ -88,6 +99,6 @@ public class WebSpawner : MonoBehaviour
         web.SetActive(false);
         isWebCreated = false;
         col.enabled = false;
-        webController.destroyAllFlies();
+        webController.DestroyAllFlies();
     }
 }

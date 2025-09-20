@@ -6,26 +6,27 @@ public class WebController : MonoBehaviour
 {
     public int maxFlyCount;
     
-    Queue<GameObject> flies = new Queue<GameObject>();
+    public Queue<GameObject> flies = new Queue<GameObject>();
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Fly") && !IsFull())
         {
+            Debug.Log("Fly catched");
             flies.Enqueue(other.gameObject);
         }
     }
 
     public bool IsFull()
     {
-        return flies.Count == maxFlyCount;
+        return flies.Count >= maxFlyCount;
     }
 
-    public bool isAnyFlyCatched()
+    public bool IsAnyFlyCatched()
     {
         return flies.Count > 0;
     }
 
-    public void destroyAllFlies()
+    public void DestroyAllFlies()
     {
         while (flies.Count > 0)
         {
@@ -34,7 +35,7 @@ public class WebController : MonoBehaviour
         }
     }
 
-    public void getAFly()
+    public void GetAFly()
     {
         Destroy(flies.Dequeue());
     }

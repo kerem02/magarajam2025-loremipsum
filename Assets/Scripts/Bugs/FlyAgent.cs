@@ -80,7 +80,7 @@ public class FlyAgent : MonoBehaviour
         stateTimer += Time.deltaTime;
         if (body){
             float a=cfg.captureWiggleAmp, f=cfg.captureWiggleFreq;
-            body.localScale = Vector3.one * (1f + Mathf.Sin(stateTimer*f)*a);
+            //body.localScale = Vector3.one * (1f + Mathf.Sin(stateTimer*f)*a);
         }
     }
     
