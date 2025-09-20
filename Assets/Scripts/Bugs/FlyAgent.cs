@@ -49,7 +49,7 @@ public class FlyAgent : MonoBehaviour
 
         
         Vector3 to = branch.position - transform.position;
-        if (to.sqrMagnitude < 0.16f){
+        if (to.sqrMagnitude < cfg.approachRadius * cfg.approachRadius){
             if (StealthState.SpiderHidden){
                 
             } else {

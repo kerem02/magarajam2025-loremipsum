@@ -21,4 +21,6 @@ public class FlyConfig : ScriptableObject
     public float noiseFreq = 0.7f;
     public float arrivalSlowRadius = 2.0f;
     public float pathCurvatureLerp = 6f;
+    [Header("Decision")]
+    public float approachRadius = 1.0f;
 }

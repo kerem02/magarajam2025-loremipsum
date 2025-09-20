@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FlyConfig_Default
   m_EditorClassIdentifier: 
   toBranchSpeed: 3.96
-  fleeSpeed: 22.47
+  fleeSpeed: 11.3
   turnLerp: 10
   spawnInterval: 1.5
   maxAlive: 8
@@ -23,5 +23,6 @@ MonoBehaviour:
   captureWiggleFreq: 12
   noiseAmp: 10
   noiseFreq: 2
-  arrivalSlowRadius: 1
+  arrivalSlowRadius: 5
   pathCurvatureLerp: 6
+  approachRadius: 1.86
