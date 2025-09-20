@@ -10,6 +10,8 @@ public class WebSpawner : MonoBehaviour
     public WebController webController;
     private Renderer renderer;
     private Collider col;
+    
+    public MainSpiderHungary mainSpiderHungary;
 
     public float spawnWebDuration = 2f;
     public float getAFlyDuration = 1f;
@@ -63,6 +65,7 @@ public class WebSpawner : MonoBehaviour
                 if (holdCounter >= getAFlyDuration)
                 {
                     //Burda bir adet fly sırtına attırıcaz
+                    mainSpiderHungary.gainedFood++;
                     webController.GetAFly();
                     holdCounter = 0f;
                 }
