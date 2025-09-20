@@ -26,7 +26,10 @@ public class SpiderSurfaceController : MonoBehaviour
         // Input al
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
+        Debug.Log(h);
+        Debug.Log(v);
         moveDirection = new Vector3(h, 0, v).normalized;
+        
     }
 
     void FixedUpdate()

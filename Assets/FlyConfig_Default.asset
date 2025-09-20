@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07d0f352d759d714588b6b0682823cb8, type: 3}
   m_Name: FlyConfig_Default
   m_EditorClassIdentifier: 
-  toBranchSpeed: 1.5
-  fleeSpeed: 4
+  toBranchSpeed: 3.96
+  fleeSpeed: 22.47
   turnLerp: 10
   spawnInterval: 1.5
   maxAlive: 8
@@ -22,6 +22,6 @@ MonoBehaviour:
   captureWiggleAmp: 0.08
   captureWiggleFreq: 12
   noiseAmp: 10
-  noiseFreq: 3
-  arrivalSlowRadius: 2
-  pathCurvatureLerp: 15
+  noiseFreq: 2
+  arrivalSlowRadius: 1
+  pathCurvatureLerp: 6
