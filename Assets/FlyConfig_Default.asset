@@ -21,7 +21,7 @@ MonoBehaviour:
   minFleeTime: 1
   captureWiggleAmp: 0.08
   captureWiggleFreq: 12
-  noiseAmp: 2
-  noiseFreq: 2
+  noiseAmp: 10
+  noiseFreq: 3
   arrivalSlowRadius: 2
-  pathCurvatureLerp: 6
+  pathCurvatureLerp: 15

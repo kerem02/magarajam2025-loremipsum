@@ -62,9 +62,7 @@ public class FlyAgent : MonoBehaviour
     void EnterFlee(){ state=FlyState.Flee; stateTimer=0f; fleeDir=(spawnPos-transform.position).normalized; }
     void TickFlee(){
         stateTimer += Time.deltaTime;
-
         
-        float dummy;
         Vector3 fleeNoisy = (fleeDir + new Vector3(
             (Mathf.PerlinNoise(noiseT, 1.7f)*2f-1f)*0.2f,
             0f,
@@ -86,10 +84,6 @@ public class FlyAgent : MonoBehaviour
         }
     }
     
-    void MoveAndFace(Vector3 dir, float speed){
-        transform.position += dir * speed * Time.deltaTime;
-        transform.forward = Vector3.Slerp(transform.forward, dir, Time.deltaTime * cfg.turnLerp);
-    }
     
     bool IsOutsideCamera(Camera c, float m){
         if(!c) return true;
