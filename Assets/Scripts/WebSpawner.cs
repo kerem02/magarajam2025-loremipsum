@@ -12,6 +12,7 @@ public class WebSpawner : MonoBehaviour
     private Collider col;
 
     public float spawnWebDuration = 2f;
+    public float getAFlyDuration = 2f;
     private float holdCounter = 0f;
 
     private bool inTrigger = false;
@@ -49,10 +50,22 @@ public class WebSpawner : MonoBehaviour
                 holdCounter = 0f;
                 destroyWeb();
             }
-        }
-        else
+        } else if (isWebCreated && inTrigger && webController.isAnyFlyCatched())
         {
-            
+            if (Input.GetKey(KeyCode.Space))
+            {
+                holdCounter += Time.deltaTime;
+
+                if (holdCounter >= getAFlyDuration)
+                {
+                    //Burda bir adet fly sırtına attırıcaz
+                    webController.getAFly();
+                }
+            }   
+            if (Input.GetKeyUp(KeyCode.Space))
+            {
+                holdCounter = 0f;
+            }
         }
     }
 

@@ -33,4 +33,9 @@ public class WebController : MonoBehaviour
             Destroy(fly);
         }
     }
+
+    public void getAFly()
+    {
+        Destroy(flies.Dequeue());
+    }
 }
