@@ -23,6 +23,6 @@ MonoBehaviour:
   captureWiggleFreq: 12
   noiseAmp: 10
   noiseFreq: 2
-  arrivalSlowRadius: 5
+  arrivalSlowRadius: 1
   pathCurvatureLerp: 6
   approachRadius: 1.86
