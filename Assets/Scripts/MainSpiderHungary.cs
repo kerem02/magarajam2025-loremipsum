@@ -91,7 +91,7 @@ public class MainSpiderHungary : MonoBehaviour
         if (isThereFlyOnBack)
         {
             Destroy(spawnedFlyOnBack);
-            spiderSurfaceWalker.moveSpeed -= walkDebuffAmount;
+            spiderSurfaceWalker.moveSpeed += walkDebuffAmount;
             isThereFlyOnBack = false;
         }
         else
