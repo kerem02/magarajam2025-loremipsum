@@ -16,6 +16,7 @@ public class FlyAgent : MonoBehaviour
     bool despawnRequested;
     Transform body;
     float noiseT;
+    private float life;
 
     public void Init(FlySpawner sp, FlyConfig config, Transform branchTarget, Camera cameraRef, Vector3 spawnPosition)
     {
@@ -33,6 +34,9 @@ public class FlyAgent : MonoBehaviour
             case FlyState.Flee: TickFlee(); break;
             case FlyState.Captured: TickCaptured(); break;
         }
+        
+        life += Time.deltaTime;
+        if (life > 20f && state != FlyState.Captured) Despawn();
     }
     
     bool IsWebAtTarget(Vector3 targetPos){
