@@ -181,6 +181,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: spiderman
       objectReference: {fileID: 0}
+    - target: {fileID: 1138551662810912953, guid: 221b36959651a1b41b876a25ff477700, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e2fb40a39fc7cbe4cb54de4d3f692eeb, type: 2}
+    - target: {fileID: 1301301807412992331, guid: 221b36959651a1b41b876a25ff477700, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e2fb40a39fc7cbe4cb54de4d3f692eeb, type: 2}
+    - target: {fileID: 1496493362038936876, guid: 221b36959651a1b41b876a25ff477700, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e2fb40a39fc7cbe4cb54de4d3f692eeb, type: 2}
+    - target: {fileID: 3759386373169196504, guid: 221b36959651a1b41b876a25ff477700, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e2fb40a39fc7cbe4cb54de4d3f692eeb, type: 2}
     - target: {fileID: 5866666021909216657, guid: 221b36959651a1b41b876a25ff477700, type: 3}
       propertyPath: m_Controller
       value: 

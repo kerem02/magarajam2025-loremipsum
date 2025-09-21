@@ -19,6 +19,8 @@ public class WebSpawner : MonoBehaviour
 
     private bool inTrigger = false;
 
+    public Animator animator;
+
     private void Awake()
     {
         webController = web.GetComponent<WebController>();
@@ -33,6 +35,9 @@ public class WebSpawner : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.Space))
             {
+                
+                animator.SetBool("isTwerking", true);
+                
                 web.SetActive(true);
                 holdCounter += Time.deltaTime;
 
@@ -48,6 +53,7 @@ public class WebSpawner : MonoBehaviour
                     Color ca = renderer.material.color;
                     ca.a = 1f;
                     renderer.material.color = ca;
+                    animator.SetBool("isTwerking", false);
                 }
             }
 
@@ -55,6 +61,7 @@ public class WebSpawner : MonoBehaviour
             {
                 holdCounter = 0f;
                 destroyWeb();
+                animator.SetBool("isTwerking", false);
             }
         } else if (isWebCreated && inTrigger && webController.IsAnyFlyCatched())
         {

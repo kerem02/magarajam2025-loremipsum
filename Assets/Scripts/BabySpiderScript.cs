@@ -7,7 +7,11 @@ public class BabySpiderScript : MonoBehaviour
 
     public float hungerRate = 2f;
 
+    public float jumpingThreshold = 40f;
+
     private float tick;
+
+    public Animator[] animators;
 
     void Update()
     {
@@ -18,7 +22,15 @@ public class BabySpiderScript : MonoBehaviour
             hunger -= hungerRate;
             tick -= 1f;
         }
-
+        if(hunger <= jumpingThreshold)
+        {
+            MakeJumpingTrue();
+        }
+        else
+        {
+            
+            MakeJumpingFalse();
+        }
         hunger = Mathf.Clamp(hunger, 0f, maxHunger);
     }
 
@@ -26,5 +38,19 @@ public class BabySpiderScript : MonoBehaviour
     {
         hunger = Mathf.Clamp(hunger + amount, 0f, maxHunger);
         Debug.Log("Hunger: " + hunger);;
+    }
+
+
+
+    public void MakeJumpingTrue() {
+        foreach(Animator animator in animators){
+            animator.SetBool("isJumping", true);
+        }
+    }
+    
+    public void MakeJumpingFalse() {
+        foreach(Animator animator in animators){
+            animator.SetBool("isJumping", false);
+        }
     }
 }

@@ -12,6 +12,8 @@ public class SpiderSurfaceController : MonoBehaviour
     private Vector3 moveDirection;
     private Vector3 velocity;
 
+    private Animator animator;
+
     void Update()
     {
         // Input al

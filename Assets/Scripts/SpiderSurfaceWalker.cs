@@ -35,7 +35,9 @@ public class SpiderSurfaceWalker : MonoBehaviour
     bool inTransition;
     Vector3 transTargetPos;
     Vector3 transTargetNormal;
-
+    
+    public Animator animator;
+    
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -69,6 +71,16 @@ public class SpiderSurfaceWalker : MonoBehaviour
 
             // input -> yüzeye projeksiyon
             Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            
+            
+            if (input.x > 0.01f || input.y > 0.01f)
+            {
+                animator.SetBool("isWalking", true);
+            }
+            else
+            {
+                animator.SetBool("isWalking", false);
+            }
             Vector3 moveDir = GetSurfaceMoveDirection(input, lastGroundNormal);
 
             Vector3 targetVel = moveDir * moveSpeed;
