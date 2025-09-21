@@ -23,6 +23,8 @@ public class AudioManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        
+        
     }
 
     public void SetMainMusicVolume(float value)
