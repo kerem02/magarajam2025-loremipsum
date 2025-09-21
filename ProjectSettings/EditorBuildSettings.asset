@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Main.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: "Assets/Scenes/Biti\u015F Sinematik.unity"
+    guid: 4a853739467730641a0e13ff9c5673a7
   m_configObjects: {}
