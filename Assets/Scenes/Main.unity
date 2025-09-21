@@ -2552,6 +2552,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: "\xD6r\xFCmcek A\u011F\u0131"
       objectReference: {fileID: 0}
+    - target: {fileID: 2182495643007419738, guid: 402e6d845c1e93d4891a1502af2e2e50, type: 3}
+      propertyPath: maxFlyCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3388106128689015435, guid: 402e6d845c1e93d4891a1502af2e2e50, type: 3}
+      propertyPath: maxFlyCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6101680753818500925, guid: 402e6d845c1e93d4891a1502af2e2e50, type: 3}
+      propertyPath: maxFlyCount
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
