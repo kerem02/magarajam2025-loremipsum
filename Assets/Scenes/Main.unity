@@ -755,8 +755,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 718856730}
   - {fileID: 847800060}
+  - {fileID: 718856730}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -870,7 +870,7 @@ GameObject:
   - component: {fileID: 718856732}
   - component: {fileID: 718856731}
   m_Layer: 5
-  m_Name: Siyah
+  m_Name: BarOutline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -885,15 +885,15 @@ RectTransform:
   m_GameObject: {fileID: 718856729}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 693151379}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 100, y: 200}
-  m_SizeDelta: {x: 100, y: 353.9017}
+  m_AnchoredPosition: {x: 115.6, y: 300}
+  m_SizeDelta: {x: 1024, y: 1536}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &718856731
 MonoBehaviour:
@@ -908,14 +908,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 0}
+  m_Texture: {fileID: 2800000, guid: e4f436d1d4e8e9540a93f73b5bb3c4ad, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -949,7 +949,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &732900851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1180,7 +1180,7 @@ GameObject:
   - component: {fileID: 847800062}
   - component: {fileID: 847800061}
   m_Layer: 5
-  m_Name: Beyaz
+  m_Name: BeyazDoluluk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1202,8 +1202,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 100, y: 200}
-  m_SizeDelta: {x: 80, y: 330}
+  m_AnchoredPosition: {x: 115.6, y: 285.02167}
+  m_SizeDelta: {x: 153.5166, y: 443.7051}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &847800061
 MonoBehaviour:
@@ -2508,6 +2508,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 788913213285257848, guid: 402e6d845c1e93d4891a1502af2e2e50, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1371605569568172265, guid: 402e6d845c1e93d4891a1502af2e2e50, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2552,6 +2556,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "\xD6r\xFCmcek A\u011F\u0131"
       objectReference: {fileID: 0}
+    - target: {fileID: 1748306308030706259, guid: 402e6d845c1e93d4891a1502af2e2e50, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2182495643007419738, guid: 402e6d845c1e93d4891a1502af2e2e50, type: 3}
       propertyPath: maxFlyCount
       value: 1
@@ -2559,6 +2567,14 @@ PrefabInstance:
     - target: {fileID: 3388106128689015435, guid: 402e6d845c1e93d4891a1502af2e2e50, type: 3}
       propertyPath: maxFlyCount
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5679853716470791175, guid: 402e6d845c1e93d4891a1502af2e2e50, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6050048978604829717, guid: 402e6d845c1e93d4891a1502af2e2e50, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6101680753818500925, guid: 402e6d845c1e93d4891a1502af2e2e50, type: 3}
       propertyPath: maxFlyCount
