@@ -17,6 +17,7 @@ public class FlyAgent : MonoBehaviour
     Transform body;
     float noiseT;
     private float life;
+    WebController web;
 
     public void Init(FlySpawner sp, FlyConfig config, Transform branchTarget, Camera cameraRef, Vector3 spawnPosition)
     {
@@ -44,6 +45,19 @@ public class FlyAgent : MonoBehaviour
         var hits = Physics.OverlapSphere(targetPos, cfg.webCheckRadius, cfg.webMask, QueryTriggerInteraction.Collide);
         return hits != null && hits.Length > 0;
     }
+    
+    
+    WebController FindWebAtTarget(Vector3 pos){
+        // Web layer'ındaki collider'ları tara; içlerinden WebController olanı döndür
+        var hits = Physics.OverlapSphere(pos, cfg.webCheckRadius, cfg.webMask, QueryTriggerInteraction.Collide);
+        if (hits == null) return null;
+        foreach (var h in hits){
+            var wc = h.GetComponent<WebController>() ?? h.GetComponentInParent<WebController>();
+            if (wc != null) return wc;
+        }
+        return null;
+    }
+
 
 
     void TickToBranch(){
@@ -61,13 +75,14 @@ public class FlyAgent : MonoBehaviour
         
         Vector3 to = branch.position - transform.position;
         if (to.sqrMagnitude < cfg.approachRadius * cfg.approachRadius){
-            
-            bool webThere = IsWebAtTarget(branch.position);
-            if (StealthState.SpiderHidden && webThere){
-                
-            } else {
-                EnterFlee();
+            // 🔎 hedefte aktif bir ağ var mı? varsa cache'le
+            if (web == null) web = FindWebAtTarget(branch.position);
+
+            bool canUseWeb = StealthState.SpiderHidden && web != null && web.IsFull() == false;
+            if (!canUseWeb){
+                EnterFlee(); // gizli değilse ya da ağ yoksa ya da ağ doluysa → kaç
             }
+            // else: devam et; ağa değerse Captured olacak
         }
     }
 
@@ -110,9 +125,23 @@ public class FlyAgent : MonoBehaviour
     }
     
     void OnTriggerEnter(Collider other){
-        if (state==FlyState.Captured) return;
-        if (other.gameObject.layer == LayerMask.NameToLayer("Web")) EnterCaptured();
+        if (state == FlyState.Captured) return;
+        if (other.gameObject.layer != LayerMask.NameToLayer("Web")) return;
+
+        // web referansı yoksa, çarptığın objeden çek
+        if (!web){
+            web = other.GetComponent<WebController>() ?? other.GetComponentInParent<WebController>();
+        }
+
+        // ağ doluysa yakalama yok → kaç
+        if (web != null && web.IsFull()){
+            EnterFlee();
+            return;
+        }
+
+        EnterCaptured();
     }
+
     public void EnterCaptured(){ state=FlyState.Captured; stateTimer=0f; }
     
     Vector3 ComputeNoisyDir(Vector3 target, float baseSpeed, out float speedScale){

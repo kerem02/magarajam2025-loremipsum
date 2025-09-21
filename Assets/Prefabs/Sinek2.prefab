@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8467196721929664251}
   m_Layer: 0
   m_Name: Sinek2
-  m_TagString: Untagged
+  m_TagString: Fly
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
