@@ -63,7 +63,7 @@ public class WebSpawner : MonoBehaviour
                 destroyWeb();
                 animator.SetBool("isTwerking", false);
             }
-        } else if (isWebCreated && inTrigger && webController.IsAnyFlyCatched())
+        } else if (isWebCreated && inTrigger && webController.IsAnyFlyCatched() && !mainSpiderHungary.isThereFlyOnBack)
         {
             if (Input.GetKey(KeyCode.Space))
             {
@@ -72,7 +72,7 @@ public class WebSpawner : MonoBehaviour
                 if (holdCounter >= getAFlyDuration)
                 {
                     //Burda bir adet fly sırtına attırıcaz
-                    mainSpiderHungary.gainedFood++;
+                    mainSpiderHungary.TakeAFlyToBackSpawnPosition();
                     webController.GetAFly();
                     holdCounter = 0f;
                 }
