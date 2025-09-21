@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class BabySpiderScript : MonoBehaviour
 {
@@ -14,6 +16,11 @@ public class BabySpiderScript : MonoBehaviour
     public Animator[] animators;
 
     public AudioClip sfxBabyFeed;
+
+    public Image hungaryBar;
+
+    public GameObject kaybettinText;
+    public bool isLost = false;
 
     void Update()
     {
@@ -34,6 +41,18 @@ public class BabySpiderScript : MonoBehaviour
             MakeJumpingFalse();
         }
         hunger = Mathf.Clamp(hunger, 0f, maxHunger);
+        UpdateHungaryBar(hunger);
+        
+        if(hunger <= 0)
+        {
+            LoseGame();
+        }
+
+        if (isLost && Input.GetKeyDown(KeyCode.R))
+        {
+            Time.timeScale = 1f;
+            SceneManager.LoadScene(1);
+        }
     }
 
     public void FeedBaby(float amount)
@@ -55,5 +74,22 @@ public class BabySpiderScript : MonoBehaviour
         foreach(Animator animator in animators){
             animator.SetBool("isJumping", false);
         }
+    }
+
+    public void UpdateHungaryBar(float value)
+    {
+        hungaryBar.fillAmount = value/maxHunger;
+    }
+
+    public void LoseGame()
+    {
+        kaybettinText.SetActive(true);
+        Time.timeScale = 0;
+        isLost = true;
+    }
+    
+    public void WinGame()
+    {
+        SceneManager.LoadScene(2);
     }
 }

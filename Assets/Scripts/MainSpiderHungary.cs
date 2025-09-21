@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainSpiderHungary : MonoBehaviour
 {
@@ -28,7 +29,7 @@ public class MainSpiderHungary : MonoBehaviour
     public SpiderSurfaceWalker spiderSurfaceWalker;
     public float walkDebuffAmount = 1;
 
-
+    public GameObject stealthImage;
     void Awake()
     {
         spiderSurfaceWalker = GetComponent<SpiderSurfaceWalker>();
@@ -61,6 +62,7 @@ public class MainSpiderHungary : MonoBehaviour
         }
 
         hunger = Mathf.Clamp(hunger, 0f, maxHunger);
+        UpdateStealthImage();
     }
 
     public void TakeAFlyToBackSpawnPosition()
@@ -116,5 +118,11 @@ public class MainSpiderHungary : MonoBehaviour
     public void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("BabySpider")) isOnFeedZone = false;
+    }
+
+
+    public void UpdateStealthImage()
+    {
+        stealthImage.SetActive(StealthState.SpiderHidden);
     }
 }

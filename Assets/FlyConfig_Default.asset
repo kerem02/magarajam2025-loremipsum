@@ -15,8 +15,8 @@ MonoBehaviour:
   toBranchSpeed: 3.96
   fleeSpeed: 11.3
   turnLerp: 10
-  spawnInterval: 1.5
-  maxAlive: 8
+  spawnInterval: 3
+  maxAlive: 6
   offscreenMargin: 0.08
   minFleeTime: 1
   captureWiggleAmp: 0.08
