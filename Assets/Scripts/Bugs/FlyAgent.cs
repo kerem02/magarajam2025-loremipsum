@@ -18,6 +18,9 @@ public class FlyAgent : MonoBehaviour
     float noiseT;
     private float life;
     WebController web;
+    public AudioClip sfxCaptured;
+    public AudioSource buzzSource;
+    public AudioClip buzzClip;
 
     public void Init(FlySpawner sp, FlyConfig config, Transform branchTarget, Camera cameraRef, Vector3 spawnPosition)
     {
@@ -38,6 +41,14 @@ public class FlyAgent : MonoBehaviour
         
         life += Time.deltaTime;
         if (life > 20f && state != FlyState.Captured) Despawn();
+    }
+    
+    void Start(){
+        if (buzzSource && buzzClip){
+            buzzSource.clip = buzzClip;
+            buzzSource.loop = true;
+            buzzSource.Play();
+        }
     }
     
     bool IsWebAtTarget(Vector3 targetPos){
@@ -142,7 +153,12 @@ public class FlyAgent : MonoBehaviour
         EnterCaptured();
     }
 
-    public void EnterCaptured(){ state=FlyState.Captured; stateTimer=0f; }
+    public void EnterCaptured()
+    {
+        state=FlyState.Captured; stateTimer=0f;
+        AudioManager.instance.PlaySFX(sfxCaptured, 0.5f);
+        buzzSource.Stop();
+    }
     
     Vector3 ComputeNoisyDir(Vector3 target, float baseSpeed, out float speedScale){
         Vector3 to = (target - transform.position);

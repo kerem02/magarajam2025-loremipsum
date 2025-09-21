@@ -17,6 +17,8 @@ public class MainSpiderHungary : MonoBehaviour
     private float tick;
 
     private bool isOnFeedZone = false;
+
+    public AudioClip sfxEat;
     
     void Update()
     {
@@ -52,6 +54,7 @@ public class MainSpiderHungary : MonoBehaviour
     {
         hunger = Mathf.Clamp(hunger + amount, 0f, maxHunger);
         gainedFood--;
+        AudioManager.instance.PlaySFX(sfxEat, 0.9f);
         Debug.Log("Hunger: " + hunger);;
     }
 

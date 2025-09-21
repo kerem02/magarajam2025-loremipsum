@@ -8,7 +8,7 @@ public class AyarlarScript : MonoBehaviour
 
     public void setMainMusicVolume()
     {
-        audioManager.SetMainMusicVolume(mainMusicSlider.value);
+        //audioManager.SetMainMusicVolume(mainMusicSlider.value);
     }
     
 }

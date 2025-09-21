@@ -13,6 +13,8 @@ public class BabySpiderScript : MonoBehaviour
 
     public Animator[] animators;
 
+    public AudioClip sfxBabyFeed;
+
     void Update()
     {
         tick += Time.deltaTime;
@@ -38,6 +40,7 @@ public class BabySpiderScript : MonoBehaviour
     {
         hunger = Mathf.Clamp(hunger + amount, 0f, maxHunger);
         Debug.Log("Hunger: " + hunger);;
+        AudioManager.instance.PlaySFX(sfxBabyFeed, 0.9f);
     }
 
 

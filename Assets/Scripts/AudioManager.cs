@@ -1,36 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-
-    [Header("------------ Main Music Settings ------------")]
-    public AudioSource mainMusicSource;
-    public AudioClip mainMusic;
-    [Header("------------ Effects ------------")]
-
     public static AudioManager instance;
 
-    private void Awake()
-    {
-        if (instance == null)
-        {
+    [Header("Music")]
+    public AudioSource musicSource;   // müzik için ayrı
+    [Header("SFX")]
+    public AudioSource sfxSource;     // tüm efektler için tek kaynak
+
+    void Awake(){
+        if (instance == null){
             instance = this;
             DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
+        } else {
             Destroy(gameObject);
         }
-        
-        
     }
 
-    public void SetMainMusicVolume(float value)
-    {
-        mainMusicSource.volume = value;
+    public void PlayMusic(AudioClip clip, float volume = 1f){
+        if (clip == null) return;
+        musicSource.clip = clip;
+        musicSource.loop = true;
+        musicSource.volume = volume;
+        musicSource.Play();
     }
-    
-    
+
+    public void PlaySFX(AudioClip clip, float volume = 1f){
+        if (clip == null) return;
+        sfxSource.PlayOneShot(clip, volume);
+    }
 }

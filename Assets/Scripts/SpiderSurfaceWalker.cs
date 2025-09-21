@@ -38,6 +38,7 @@ public class SpiderSurfaceWalker : MonoBehaviour
     
     public Animator animator;
     
+    
     void Awake()
     {
         rb = GetComponent<Rigidbody>();

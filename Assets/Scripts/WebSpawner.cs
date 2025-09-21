@@ -21,6 +21,9 @@ public class WebSpawner : MonoBehaviour
 
     public Animator animator;
 
+    public AudioClip sfxWeb;
+    private bool isTwerk;
+
     private void Awake()
     {
         webController = web.GetComponent<WebController>();
@@ -38,6 +41,7 @@ public class WebSpawner : MonoBehaviour
                 
                 animator.SetBool("isTwerking", true);
                 
+                
                 web.SetActive(true);
                 holdCounter += Time.deltaTime;
 
@@ -54,6 +58,7 @@ public class WebSpawner : MonoBehaviour
                     ca.a = 1f;
                     renderer.material.color = ca;
                     animator.SetBool("isTwerking", false);
+                    isTwerk = false;
                 }
             }
 
@@ -111,4 +116,5 @@ public class WebSpawner : MonoBehaviour
         col.enabled = false;
         webController.DestroyAllFlies();
     }
+    
 }
