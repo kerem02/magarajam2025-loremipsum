@@ -7,6 +7,8 @@ TagManager:
   - Nest
   - BranchTarget
   - Fly
+  - Spider
+  - BabySpider
   layers:
   - Default
   - TransparentFX
