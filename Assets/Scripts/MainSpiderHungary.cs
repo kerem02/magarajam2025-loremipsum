@@ -12,7 +12,7 @@ public class MainSpiderHungary : MonoBehaviour
     public float hunger = 100f;
 
     public float hungerRate = 2f;
-    public float feedAmount = 10f;
+    public float feedAmount = 30f;
     public GameObject babySpider;
 
     public GameObject flyPrefab;
@@ -93,7 +93,7 @@ public class MainSpiderHungary : MonoBehaviour
         if (isThereFlyOnBack)
         {
             Destroy(spawnedFlyOnBack);
-            spiderSurfaceWalker.moveSpeed -= walkDebuffAmount;
+            spiderSurfaceWalker.moveSpeed += walkDebuffAmount;
             isThereFlyOnBack = false;
         }
         else
