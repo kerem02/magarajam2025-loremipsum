@@ -21,6 +21,9 @@ public class BabySpiderScript : MonoBehaviour
 
     public GameObject kaybettinText;
     public bool isLost = false;
+    
+    public int feedWinAmount = 15;
+    public int feedWinCount = 0;
 
     void Update()
     {
@@ -53,10 +56,16 @@ public class BabySpiderScript : MonoBehaviour
             Time.timeScale = 1f;
             SceneManager.LoadScene(1);
         }
+
+        if (feedWinCount >= feedWinAmount)
+        {
+            WinGame();
+        }
     }
 
     public void FeedBaby(float amount)
     {
+        feedWinCount++;
         hunger = Mathf.Clamp(hunger + amount, 0f, maxHunger);
         Debug.Log("Hunger: " + hunger);;
         AudioManager.instance.PlaySFX(sfxBabyFeed, 0.9f);
