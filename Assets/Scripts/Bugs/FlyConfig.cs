@@ -23,4 +23,7 @@ public class FlyConfig : ScriptableObject
     public float pathCurvatureLerp = 6f;
     [Header("Decision")]
     public float approachRadius = 1.0f;
+    [Header("Web Check")]
+    public LayerMask webMask;          // Web layer'ını seç (sadece Web)
+    public float webCheckRadius = 0.6f; // hedefte ağ var mı diye bakacağımız yarıçap
 }

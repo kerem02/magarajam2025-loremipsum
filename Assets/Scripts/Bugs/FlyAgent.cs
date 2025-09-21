@@ -34,6 +34,13 @@ public class FlyAgent : MonoBehaviour
             case FlyState.Captured: TickCaptured(); break;
         }
     }
+    
+    bool IsWebAtTarget(Vector3 targetPos){
+        // Hedef çevresinde "Web" layer collider var mı?
+        var hits = Physics.OverlapSphere(targetPos, cfg.webCheckRadius, cfg.webMask, QueryTriggerInteraction.Collide);
+        return hits != null && hits.Length > 0;
+    }
+
 
     void TickToBranch(){
         if (!branch){ Despawn(); return; }
@@ -50,7 +57,9 @@ public class FlyAgent : MonoBehaviour
         
         Vector3 to = branch.position - transform.position;
         if (to.sqrMagnitude < cfg.approachRadius * cfg.approachRadius){
-            if (StealthState.SpiderHidden){
+            
+            bool webThere = IsWebAtTarget(branch.position);
+            if (StealthState.SpiderHidden && webThere){
                 
             } else {
                 EnterFlee();

@@ -26,3 +26,7 @@ MonoBehaviour:
   arrivalSlowRadius: 1
   pathCurvatureLerp: 6
   approachRadius: 1.86
+  webMask:
+    serializedVersion: 2
+    m_Bits: 64
+  webCheckRadius: 0.6
