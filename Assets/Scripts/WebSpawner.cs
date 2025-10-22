@@ -93,6 +93,7 @@ public class WebSpawner : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Spider"))
         {
+            Debug.Log("alana girdi");
             inTrigger = true;
         }
     }
@@ -103,6 +104,8 @@ public class WebSpawner : MonoBehaviour
         {
             inTrigger = false;
             holdCounter = 0f;
+            Debug.Log("alandan çıktı");
+            
         }
     }
 

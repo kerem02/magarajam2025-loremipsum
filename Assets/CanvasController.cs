@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 
@@ -5,6 +6,11 @@ public class CanvasController : MonoBehaviour
 {
     public GameObject tutorial;
     public bool tutorialActive = true;
+
+    private void Awake()
+    {
+        Time.timeScale = 0;
+    }
 
     private void Update()
     {
