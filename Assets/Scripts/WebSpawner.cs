@@ -23,6 +23,9 @@ public class WebSpawner : MonoBehaviour
 
     public AudioClip sfxWeb;
     private bool isTwerk;
+    
+    public float webDestroyCooldown = 10f;
+    private float webDestroyTimer;
 
     private void Awake()
     {
@@ -87,6 +90,16 @@ public class WebSpawner : MonoBehaviour
                 holdCounter = 0f;
             }
         }
+
+        if (isWebCreated && webDestroyCooldown <= webDestroyTimer)
+        {
+            //Animasyon burda tetiklencek
+            destroyWeb();
+        }
+        if (isWebCreated)
+        {
+            webDestroyTimer += Time.deltaTime;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -118,6 +131,7 @@ public class WebSpawner : MonoBehaviour
         isWebCreated = false;
         col.enabled = false;
         webController.DestroyAllFlies();
+        webDestroyTimer = 0f;
     }
     
 }
