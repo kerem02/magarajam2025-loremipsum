@@ -25,11 +25,17 @@ public class MainSpiderHungary : MonoBehaviour
     private bool isOnFeedZone = false;
 
     public AudioClip sfxEat;
+
+    private bool isEating = false;
+    const int BASE_LAYER = 0;   
     
     public SpiderSurfaceWalker spiderSurfaceWalker;
     public float walkDebuffAmount = 1;
 
     public GameObject stealthImage;
+
+    public Animator animator;
+    public GameObject eatingAnimFlyHead;
     void Awake()
     {
         spiderSurfaceWalker = GetComponent<SpiderSurfaceWalker>();
@@ -42,11 +48,13 @@ public class MainSpiderHungary : MonoBehaviour
             if (isOnFeedZone)
             {
                 babySpider.GetComponent<BabySpiderScript>().FeedBaby(feedAmount);
-                DestroyFlyOnBack();
+                
             }
             else
             {
-                FeedSpider(feedAmount);
+                DestroyFlyOnBack();
+                StartEat();
+                //FeedSpider(feedAmount);
             }
         }
         
@@ -106,7 +114,6 @@ public class MainSpiderHungary : MonoBehaviour
     {
         hunger = Mathf.Clamp(hunger + amount, 0f, maxHunger);
         AudioManager.instance.PlaySFX(sfxEat, 0.9f);
-        DestroyFlyOnBack();
         Debug.Log("Hunger: " + hunger);;
     }
 
@@ -124,5 +131,37 @@ public class MainSpiderHungary : MonoBehaviour
     public void UpdateStealthImage()
     {
         stealthImage.SetActive(StealthState.SpiderHidden);
+    }
+    
+    
+    void StartEat()
+    {
+        eatingAnimFlyHead.SetActive(true);
+        isEating = true;               
+        animator.SetBool("isEating", true);   
+        StartCoroutine(EatRoutine());    
+    }
+
+    IEnumerator EatRoutine()
+    {
+        yield return new WaitUntil(() =>
+            animator.GetCurrentAnimatorStateInfo(BASE_LAYER).IsName("ÖrümcekYemeAnim"));
+
+        yield return new WaitUntil(() =>
+        {
+            var s = animator.GetCurrentAnimatorStateInfo(BASE_LAYER);
+            return s.IsName("ÖrümcekYemeAnim") && s.normalizedTime >= 1f && !animator.IsInTransition(BASE_LAYER);
+        });
+
+        DoEatLogic();  
+        
+        eatingAnimFlyHead.SetActive(false);
+        animator.SetBool("isEating", false);
+        isEating = false;
+    }
+
+    void DoEatLogic()
+    {
+        FeedSpider(feedAmount);
     }
 }

@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WebSpawner : MonoBehaviour
@@ -10,20 +9,22 @@ public class WebSpawner : MonoBehaviour
     public WebController webController;
     private Renderer renderer;
     private Collider col;
-    
-    public MainSpiderHungary mainSpiderHungary;
 
+    [Header("References")]
+    public MainSpiderHungary mainSpiderHungary;   // örümceğe referans
+    public Animator spiderAnimator;               // örümceğin Animator’ı atanacak
+
+    [Header("Durations")]
     public float spawnWebDuration = 2f;
     public float getAFlyDuration = 1f;
     private float holdCounter = 0f;
 
     private bool inTrigger = false;
-
-    public Animator animator;
+    private bool isFlyGather = false;
 
     public AudioClip sfxWeb;
     private bool isTwerk;
-    
+
     public float webDestroyCooldown = 10f;
     private float webDestroyTimer;
 
@@ -37,14 +38,13 @@ public class WebSpawner : MonoBehaviour
 
     private void Update()
     {
+        // 🕸️ Ağ oluşturma
         if (inTrigger && !isWebCreated)
         {
             if (Input.GetKey(KeyCode.Space))
             {
-                
-                animator.SetBool("isTwerking", true);
-                
-                
+                spiderAnimator.SetBool("isTwerking", true);
+
                 web.SetActive(true);
                 holdCounter += Time.deltaTime;
 
@@ -60,7 +60,7 @@ public class WebSpawner : MonoBehaviour
                     Color ca = renderer.material.color;
                     ca.a = 1f;
                     renderer.material.color = ca;
-                    animator.SetBool("isTwerking", false);
+                    spiderAnimator.SetBool("isTwerking", false);
                     isTwerk = false;
                 }
             }
@@ -69,31 +69,31 @@ public class WebSpawner : MonoBehaviour
             {
                 holdCounter = 0f;
                 destroyWeb();
-                animator.SetBool("isTwerking", false);
+                spiderAnimator.SetBool("isTwerking", false);
             }
-        } else if (isWebCreated && inTrigger && webController.IsAnyFlyCatched() && !mainSpiderHungary.isThereFlyOnBack)
-        {
-            if (Input.GetKey(KeyCode.Space))
-            {
-                holdCounter += Time.deltaTime;
+        }
 
-                if (holdCounter >= getAFlyDuration)
+        // 🪰 Ağdaki sineği alma
+        else if (isWebCreated && inTrigger && webController.IsAnyFlyCatched() && !mainSpiderHungary.isThereFlyOnBack)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                PlaySpiderFlyGather(() =>
                 {
-                    //Burda bir adet fly sırtına attırıcaz
                     mainSpiderHungary.TakeAFlyToBackSpawnPosition();
                     webController.GetAFly();
-                    holdCounter = 0f;
-                }
-            }   
+                });
+            }
+
             if (Input.GetKeyUp(KeyCode.Space))
             {
                 holdCounter = 0f;
             }
         }
 
+        // 🕸️ Ağın yok olma süresi
         if (isWebCreated && webDestroyCooldown <= webDestroyTimer)
         {
-            //Animasyon burda tetiklencek
             destroyWeb();
         }
         if (isWebCreated)
@@ -106,8 +106,8 @@ public class WebSpawner : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Spider"))
         {
-            Debug.Log("alana girdi");
             inTrigger = true;
+            Debug.Log("Örümcek alana girdi");
         }
     }
 
@@ -117,8 +117,7 @@ public class WebSpawner : MonoBehaviour
         {
             inTrigger = false;
             holdCounter = 0f;
-            Debug.Log("alandan çıktı");
-            
+            Debug.Log("Örümcek alandan çıktı");
         }
     }
 
@@ -133,5 +132,33 @@ public class WebSpawner : MonoBehaviour
         webController.DestroyAllFlies();
         webDestroyTimer = 0f;
     }
-    
+
+    // 🎯 Artık örümceğin Animator’ını kontrol eden versiyon
+    public void PlaySpiderFlyGather(Action onCompleted)
+    {
+        if (isFlyGather) return;
+
+        isFlyGather = true;
+        spiderAnimator.SetBool("isGatherFly", true);
+        StartCoroutine(FlyGatherRoutine(onCompleted));
+    }
+
+    private IEnumerator FlyGatherRoutine(Action onCompleted)
+    {
+        const int BASE_LAYER = 0;
+        const string STATE = "AğdanSinekAlmaAnim"; // Animator’daki state adıyla aynı olmalı
+
+        yield return new WaitUntil(() => spiderAnimator.GetCurrentAnimatorStateInfo(BASE_LAYER).IsName(STATE));
+
+        yield return new WaitUntil(() =>
+        {
+            var s = spiderAnimator.GetCurrentAnimatorStateInfo(BASE_LAYER);
+            return s.IsName(STATE) && s.normalizedTime >= 0.95f && !spiderAnimator.IsInTransition(BASE_LAYER);
+        });
+
+        spiderAnimator.SetBool("isGatherFly", false);
+        isFlyGather = false;
+
+        onCompleted?.Invoke();
+    }
 }
