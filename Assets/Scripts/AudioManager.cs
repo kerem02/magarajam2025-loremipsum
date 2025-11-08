@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
@@ -8,7 +9,12 @@ public class AudioManager : MonoBehaviour
     public AudioSource musicSource;   // müzik
     [Header("SFX")]
     public AudioSource sfxSource;     // efektler
-
+    
+    [Header("Mixer")]
+    public AudioMixer mixer;  
+    public string musicParam = "MusicVol";
+    public string sfxParam   = "SFXVol";
+    
     float musicVol = 1f;
     float sfxVol = 1f;
 
@@ -29,8 +35,11 @@ public class AudioManager : MonoBehaviour
     void ApplyVolumes(){
         if (musicSource) musicSource.volume = musicVol;
         if (sfxSource)   sfxSource.volume   = sfxVol;
+        mixer?.SetFloat(musicParam, LinearToDb(musicVol));
+        mixer?.SetFloat(sfxParam,   LinearToDb(sfxVol));
     }
-
+    
+    float LinearToDb(float v) => (v <= 0.0001f) ? -80f : Mathf.Log10(v) * 20f;
     public void PlayMusic(AudioClip clip, float volume = -1f){
         if (clip == null || musicSource == null) return;
         musicSource.clip = clip;
@@ -45,10 +54,11 @@ public class AudioManager : MonoBehaviour
         sfxSource.PlayOneShot(clip, v);
     }
 
-    // === Yeni: Dışarıdan ses ayarı ===
+    
     public void SetMusicVolume(float v){
         musicVol = Mathf.Clamp01(v);
         if (musicSource) musicSource.volume = musicVol;
+        mixer?.SetFloat(musicParam, LinearToDb(musicVol));
         PlayerPrefs.SetFloat("musicVol", musicVol);
     }
 
@@ -57,6 +67,7 @@ public class AudioManager : MonoBehaviour
     public void SetSFXVolume(float v){
         sfxVol = Mathf.Clamp01(v);
         if (sfxSource) sfxSource.volume = sfxVol;
+        mixer?.SetFloat(sfxParam, LinearToDb(sfxVol));
         PlayerPrefs.SetFloat("sfxVol", sfxVol);
     }
 

@@ -3,10 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MainSpiderHungary : MonoBehaviour
 {
     public int gainedFood = 0;
+
+    public GameObject kaybettinPanel;
+
+    private bool isLost = false;
+    
+    public Image hungaryBar;
     
     public float maxHunger = 100f;
     public float hunger = 100f;
@@ -70,7 +77,33 @@ public class MainSpiderHungary : MonoBehaviour
         }
 
         hunger = Mathf.Clamp(hunger, 0f, maxHunger);
+        UpdateHungaryBar(hunger);
         UpdateStealthImage();
+        
+        
+        if (!isLost && hunger <= 0f)
+        {
+            LoseGame();
+        }
+        
+        if (isLost && Input.GetKeyDown(KeyCode.R))
+        {
+            Time.timeScale = 1f;
+            SceneManager.LoadScene(1);
+        }
+    }
+    
+    void LoseGame()
+    {
+        isLost = true;
+        Time.timeScale = 0f;                    
+        if (kaybettinPanel) kaybettinPanel.SetActive(true); 
+       
+    }
+    
+    public void UpdateHungaryBar(float value)
+    {
+        hungaryBar.fillAmount = value/maxHunger;
     }
 
     public void TakeAFlyToBackSpawnPosition()

@@ -23,6 +23,8 @@ public class WebSpawner : MonoBehaviour
     private bool isFlyGather = false;
 
     public AudioClip sfxWeb;
+    public AudioSource webLoopSource; 
+    private bool webLoopPlaying; 
     private bool isTwerk;
 
     public float webDestroyCooldown = 10f;
@@ -34,6 +36,13 @@ public class WebSpawner : MonoBehaviour
         renderer = web.GetComponent<Renderer>();
         col = web.GetComponent<Collider>();
         destroyWeb();
+
+        if (webLoopSource)
+        {
+            webLoopSource.loop = true;
+            webLoopSource.playOnAwake = false;
+            if (sfxWeb) webLoopSource.clip = sfxWeb;
+        }
     }
 
     private void Update()
@@ -44,6 +53,8 @@ public class WebSpawner : MonoBehaviour
             if (Input.GetKey(KeyCode.Space))
             {
                 spiderAnimator.SetBool("isTwerking", true);
+                
+                TryStartWebLoop();
 
                 web.SetActive(true);
                 holdCounter += Time.deltaTime;
@@ -62,6 +73,8 @@ public class WebSpawner : MonoBehaviour
                     renderer.material.color = ca;
                     spiderAnimator.SetBool("isTwerking", false);
                     isTwerk = false;
+
+                    StopWebLoop();
                 }
             }
 
@@ -70,6 +83,8 @@ public class WebSpawner : MonoBehaviour
                 holdCounter = 0f;
                 destroyWeb();
                 spiderAnimator.SetBool("isTwerking", false);
+                
+                StopWebLoop();
             }
         }
 
@@ -108,6 +123,7 @@ public class WebSpawner : MonoBehaviour
         {
             inTrigger = true;
             Debug.Log("Örümcek alana girdi");
+            
         }
     }
 
@@ -118,6 +134,7 @@ public class WebSpawner : MonoBehaviour
             inTrigger = false;
             holdCounter = 0f;
             Debug.Log("Örümcek alandan çıktı");
+            StopWebLoop();
         }
     }
 
@@ -131,6 +148,20 @@ public class WebSpawner : MonoBehaviour
         col.enabled = false;
         webController.DestroyAllFlies();
         webDestroyTimer = 0f;
+        StopWebLoop();
+    }
+    
+    void TryStartWebLoop(){
+        if (webLoopPlaying) return;
+        if (!webLoopSource) return;
+        if (!webLoopSource.clip && sfxWeb) webLoopSource.clip = sfxWeb;
+        webLoopSource.Play();
+        webLoopPlaying = true;
+    }
+    void StopWebLoop(){
+        if (!webLoopPlaying) return;
+        if (webLoopSource) webLoopSource.Stop();
+        webLoopPlaying = false;
     }
 
     // 🎯 Artık örümceğin Animator’ını kontrol eden versiyon
