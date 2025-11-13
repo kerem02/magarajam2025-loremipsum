@@ -162,9 +162,12 @@ MonoBehaviour:
   isWebCreated: 0
   webController: {fileID: 0}
   mainSpiderHungary: {fileID: 630920075}
+  spiderAnimator: {fileID: 0}
   spawnWebDuration: 2
   getAFlyDuration: 1
-  animator: {fileID: 2041649799}
+  sfxWeb: {fileID: 0}
+  webLoopSource: {fileID: 0}
+  webDestroyCooldown: 10
 --- !u!65 &88945914
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -538,6 +541,12 @@ MonoBehaviour:
   - {fileID: 337626442}
   - {fileID: 1450375957}
   - {fileID: 561461109}
+  sfxBabyFeed: {fileID: 0}
+  hungaryBar: {fileID: 0}
+  kaybettinText: {fileID: 0}
+  isLost: 0
+  feedWinAmount: 15
+  feedWinCount: 0
 --- !u!65 &471365157
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -579,7 +588,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -708,6 +717,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07e46ce84881aec4fbdaeac8512faa1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gainedFood: 0
+  kaybettinPanel: {fileID: 0}
+  hungaryBar: {fileID: 0}
   maxHunger: 100
   hunger: 100
   hungerRate: 2
@@ -717,8 +729,12 @@ MonoBehaviour:
   backSpawnPosition: {fileID: 885866695}
   spawnedFlyOnBack: {fileID: 0}
   isThereFlyOnBack: 0
+  sfxEat: {fileID: 0}
   spiderSurfaceWalker: {fileID: 630920078}
   walkDebuffAmount: 0.4
+  stealthImage: {fileID: 0}
+  animator: {fileID: 0}
+  eatingAnimFlyHead: {fileID: 0}
 --- !u!114 &630920078 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 792508795905665687, guid: 0797bf99277dd9245836751b73451f37, type: 3}
@@ -1156,9 +1172,12 @@ MonoBehaviour:
   isWebCreated: 0
   webController: {fileID: 0}
   mainSpiderHungary: {fileID: 630920075}
+  spiderAnimator: {fileID: 0}
   spawnWebDuration: 2
   getAFlyDuration: 1
-  animator: {fileID: 2041649799}
+  sfxWeb: {fileID: 0}
+  webLoopSource: {fileID: 0}
+  webDestroyCooldown: 10
 --- !u!65 &732900852
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1200,7 +1219,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1875,9 +1894,12 @@ MonoBehaviour:
   isWebCreated: 0
   webController: {fileID: 0}
   mainSpiderHungary: {fileID: 630920075}
+  spiderAnimator: {fileID: 0}
   spawnWebDuration: 2
   getAFlyDuration: 1
-  animator: {fileID: 2041649799}
+  sfxWeb: {fileID: 0}
+  webLoopSource: {fileID: 0}
+  webDestroyCooldown: 10
 --- !u!65 &1223723420
 BoxCollider:
   m_ObjectHideFlags: 0
