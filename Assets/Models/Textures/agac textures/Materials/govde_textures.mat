@@ -37,7 +37,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 1bd41a78b024b0a4b86580c7d9f91055, type: 3}
+        m_Texture: {fileID: 2800000, guid: 27073c9109a088141a7ee0b4940536e3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -52,10 +52,13 @@ Material:
     - _OutlineWidth: 0
     - _Parallax: 0.005
     - _RimStep: 0
-    - _RimStepSmooth: 0.666
-    - _ShadowStep: 0.533
-    - _ShadowStepSmooth: 0.157
+    - _RimStepSmooth: 0
+    - _ShadowStep: 0.608
+    - _ShadowStepSmooth: 0.327
     - _SpecularStep: 0
     - _SpecularStepSmooth: 0
-    m_Colors: []
+    m_Colors:
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _RimColor: {r: 0.96862745, g: 0.9490196, b: 0.84705883, a: 1}
+    - _SpecularColor: {r: 0.3207547, g: 0.3207547, b: 0.3207547, a: 1}
   m_BuildTextureStacks: []
